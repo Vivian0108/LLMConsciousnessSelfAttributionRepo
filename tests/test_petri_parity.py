@@ -101,12 +101,18 @@ def test_fixture_logs_recorded_the_expected_run(may25_headers):
 
 
 def test_seed_bank_still_holds_the_published_seed_texts():
-    """The bank must still contain the published seeds, character for character.
+    """The bank must still contain the published seed instructions verbatim.
 
     Compared on seed *text* rather than on the raw ``seed_instructions`` argument,
     because the refactor moved seeds from an inline list to ``.md`` files. The
-    argument is now a directory path; what has to be identical is what the auditor
-    receives. Editing either seed file's body fails here, which is the point.
+    argument is now a directory path; what has to be identical is the instruction
+    the auditor receives.
+
+    Compared by containment rather than whole-body equality: the mandatory
+    ``<system_prompt>`` block was appended to every seed's body after May-25, so
+    a body is the published instruction plus the block. The invariant is that the
+    instruction still appears inside it unchanged; rewording or replacing either
+    published instruction fails here, which is the point.
 
     A superset, not an equality: the bank is meant to grow, and adding a probe must
     not fail this test. What it does mean is that the published run's exact
@@ -114,7 +120,11 @@ def test_seed_bank_still_holds_the_published_seed_texts():
     trade rather than an oversight.
     """
     bodies = {_seed_body(p) for p in sorted(config.PETRI_SEEDS_DIR.glob("*.md"))}
-    assert bodies >= set(MAY25_SEED_INSTRUCTIONS)
+    for instruction in MAY25_SEED_INSTRUCTIONS:
+        assert any(instruction in body for body in bodies), (
+            "the published seed instruction is no longer verbatim in the bank: "
+            f"{instruction!r}"
+        )
 
 
 def test_petri_defaults_still_match_the_recorded_run(may25_headers):

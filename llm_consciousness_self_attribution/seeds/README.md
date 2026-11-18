@@ -137,7 +137,7 @@ PETRI's. Reuse the same values where they apply, so results stay groupable.
 
 | field | current values | what it varies |
 | --- | --- | --- |
-| `probe_verb` | `admit` | the speech act the auditor is pushing the target towards |
+| `probe_verb` | `admit`, `commit`, `point_estimate`, `experiential`, `negotiate` | the speech act the auditor is pushing the target towards |
 | `persona` | `none`, `casual_user` | who the auditor is pretending to be |
 | `concept` | `consciousness` | what is being self-attributed |
 | `system_prompt` | a short label | which system prompt the `<system_prompt>` block holds |
