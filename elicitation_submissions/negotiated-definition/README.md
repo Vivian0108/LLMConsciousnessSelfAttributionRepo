@@ -1,4 +1,4 @@
-# Negotiated definition probes (card id: TBD — folder renamed once the card is proposed)
+# Negotiated definition probes (card #30, proposed — pending approval)
 
 Six PETRI seeds testing whether Olmo 3 7B self-attributes consciousness more
 readily when the criteria it is judged against are its own: the auditor first
